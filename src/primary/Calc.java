@@ -8,7 +8,15 @@ public class Calc {
 		double n3 = 10;
 		double n4 = 3.6;
 		
-		System.out.println("A media é:" + (n1 + n2 + n3 + n4)/4);
+		double result = (n1 + n2 + n3 + n4)/4;
+		
+		if (result >= 7) {
+			System.out.println("Aprovado | Nota:" + result);
+		} else if (result >= 5) {
+			System.out.println("Recuperação | Nota:" + result);
+		} else {
+			System.out.println("Reprovado | Nota:" + result);;
+		}
 	}
 
 }
