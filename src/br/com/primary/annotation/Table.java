@@ -3,8 +3,8 @@ package br.com.primary.annotation;
 import java.lang.annotation.*;
 
 @Documented
-@Target(ElementType.FIELD)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface TypeKey {
+public @interface Table {
 	String value();
 }

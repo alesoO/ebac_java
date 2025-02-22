@@ -6,21 +6,38 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import br.com.primary.annotation.Table;
+import br.com.primary.annotation.TableColumn;
 import br.com.primary.annotation.TypeKey;
 import br.com.primary.main.dao.Persistent;
 
+@Table("Sale")
 public class Venda implements Persistent {
 	public enum Status {
 		INICIADA, CONCLUIDA, CANCELADA;
+		public static Status getByName(String value) {
+			for (Status status : Status.values()) {
+				if(status.name().equals(value)) {
+					return status;
+				}
+			}
+			return null;
+		}
 	}
 	
-	@TypeKey("getCodigo")
+	@TableColumn(dbName = "id", setJavaName = "setId")
+	private Long id;
+	@TypeKey("getCode")
+	@TableColumn(dbName = "code", setJavaName = "setCode")
 	private String code;
-	
+	@TableColumn(dbName = "id_client_fk", setJavaName = "setIdClientFk")
 	private Cliente cliente;
 	private Set<ProdutoQuantidade> produtos;
+	@TableColumn(dbName = "total_value", setJavaName = "setTotalValue")
 	private BigDecimal totalValue;
-	private Instant SaleDate;
+	@TableColumn(dbName = "sale_date", setJavaName = "setSaleDate")
+	private Instant saleDate;
+	@TableColumn(dbName = "sale_status", setJavaName = "setStatus")
 	private Status status;
 	
 	public Venda() {
@@ -108,11 +125,11 @@ public class Venda implements Persistent {
 	}
 
 	public Instant getSaleDate() {
-		return SaleDate;
+		return saleDate;
 	}
 
 	public void setSaleDate(Instant saleDate) {
-		SaleDate = saleDate;
+		this.saleDate = saleDate;
 	}
 
 	public Status getStatus() {
@@ -121,6 +138,22 @@ public class Venda implements Persistent {
 
 	public void setStatus(Status status) {
 		this.status = status;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setProdutos(Set<ProdutoQuantidade> produtos) {
+		this.produtos = produtos;
+	}
+
+	public void setTotalValue(BigDecimal totalValue) {
+		this.totalValue = totalValue;
 	}
 	
 }

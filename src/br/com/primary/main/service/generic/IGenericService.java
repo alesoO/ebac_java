@@ -4,17 +4,18 @@ import java.io.Serializable;
 import java.util.Collection;
 
 import br.com.primary.main.dao.Persistent;
+import br.com.primary.main.exceptions.DaoException;
 import br.com.primary.main.exceptions.TypeKeyNotFoundException;
 
 public interface IGenericService<T extends Persistent, E extends Serializable> {
 	
-	public Boolean add(T entity) throws TypeKeyNotFoundException;
+	public Boolean add(T entity) throws TypeKeyNotFoundException, DaoException;
 	
-	public void delete(E value);
+	public void delete(E value) throws DaoException;
 	
-	public void edit(T entity) throws TypeKeyNotFoundException;
+	public void edit(T entity) throws TypeKeyNotFoundException, DaoException;
 	
-	public T show(E value);
+	public T show(E value) throws DaoException;
 	
-	public Collection<T> showAll();
+	public Collection<T> showAll() throws DaoException;
 }

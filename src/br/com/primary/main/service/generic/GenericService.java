@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.Collection;
 import br.com.primary.main.dao.Persistent;
 import br.com.primary.main.dao.generics.IGenericDAO;
+import br.com.primary.main.exceptions.DaoException;
+import br.com.primary.main.exceptions.MoreThanOneRegisterException;
+import br.com.primary.main.exceptions.TableException;
 import br.com.primary.main.exceptions.TypeKeyNotFoundException;
 
 public abstract class GenericService<T extends Persistent, E extends Serializable> implements IGenericService<T,E> {
@@ -14,27 +17,32 @@ public abstract class GenericService<T extends Persistent, E extends Serializabl
 	}
 	
 	@Override
-	public Boolean add(T entity) throws TypeKeyNotFoundException {
+	public Boolean add(T entity) throws TypeKeyNotFoundException, DaoException {
 		return this.dao.add(entity);
 	}
 	
 	@Override
-	public void delete(E value) {
+	public void delete(E value) throws DaoException {
 		this.dao.delete(value);
 	}
 	
 	@Override
-	public void edit(T entity) throws TypeKeyNotFoundException {
+	public void edit(T entity) throws TypeKeyNotFoundException, DaoException {
 		this.edit(entity);
 	}
 	
 	@Override
-	public T show(E value) {
-		return this.show(value);
+	public T show(E value) throws DaoException {
+		try {
+			return this.dao.show(value);
+		} catch(MoreThanOneRegisterException | TableException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	@Override
-	public Collection<T> showAll() {
+	public Collection<T> showAll() throws DaoException {
 		return this.dao.showAll();
 	}
 }

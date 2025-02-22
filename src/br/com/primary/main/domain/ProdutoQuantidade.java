@@ -2,9 +2,17 @@ package br.com.primary.main.domain;
 
 import java.math.BigDecimal;
 
+import br.com.primary.annotation.Table;
+import br.com.primary.annotation.TableColumn;
+
+@Table("ProductQuantity")
 public class ProdutoQuantidade {
+	@TableColumn(dbName = "id", setJavaName = "setId")
+	private Long id;
 	private Produto product;
+	@TableColumn(dbName = "quantity", setJavaName = "setQuantity")
 	private Integer quantity;
+	@TableColumn(dbName = "totalValue", setJavaName = "setTotalValue")
 	private BigDecimal totalValue;
 	
 	public ProdutoQuantidade() {
@@ -28,6 +36,12 @@ public class ProdutoQuantidade {
 	}
 	public void setTotalValue(BigDecimal totalValue) {
 		this.totalValue = totalValue;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	public void add(Integer quantity) {

@@ -1,15 +1,9 @@
 package br.com.primary.main.service;
 
 import br.com.primary.main.domain.Cliente;
-import br.com.primary.main.exceptions.TypeKeyNotFoundException;
+import br.com.primary.main.exceptions.DaoException;
+import br.com.primary.main.service.generic.IGenericService;
 
-public interface IClienteService {
-	
-	public Boolean add(Cliente cliente) throws TypeKeyNotFoundException;
-	
-	Cliente searchCPF(Long cpf);
-	
-	void delete(Long cpf);
-	
-	void edit(Cliente cliente) throws TypeKeyNotFoundException;
+public interface IClienteService extends IGenericService<Cliente, Long> {
+	Cliente searchCPF(Long cpf) throws DaoException;
 }
