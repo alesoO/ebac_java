@@ -32,13 +32,8 @@ public abstract class GenericService<T extends Persistent, E extends Serializabl
 	}
 	
 	@Override
-	public T show(E value) throws DaoException {
-		try {
-			return this.dao.show(value);
-		} catch(MoreThanOneRegisterException | TableException e) {
-			e.printStackTrace();
-		}
-		return null;
+	public T show(E value) throws DaoException, MoreThanOneRegisterException, TableException {
+		return this.dao.show(value);
 	}
 	
 	@Override

@@ -5,6 +5,8 @@ import java.util.Collection;
 
 import br.com.primary.main.dao.Persistent;
 import br.com.primary.main.exceptions.DaoException;
+import br.com.primary.main.exceptions.MoreThanOneRegisterException;
+import br.com.primary.main.exceptions.TableException;
 import br.com.primary.main.exceptions.TypeKeyNotFoundException;
 
 public interface IGenericService<T extends Persistent, E extends Serializable> {
@@ -15,7 +17,7 @@ public interface IGenericService<T extends Persistent, E extends Serializable> {
 	
 	public void edit(T entity) throws TypeKeyNotFoundException, DaoException;
 	
-	public T show(E value) throws DaoException;
+	public T show(E value) throws DaoException, MoreThanOneRegisterException, TableException;
 	
 	public Collection<T> showAll() throws DaoException;
 }
