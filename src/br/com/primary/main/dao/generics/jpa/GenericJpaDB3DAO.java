@@ -1,7 +1,6 @@
-package br.com.primary.main.dao.generics;
+package br.com.primary.main.dao.generics.jpa;
 
 import br.com.primary.main.dao.jpa.Persistente;
-import br.com.primary.main.dao.generics.jpa.GenericJpaDAO;
 import java.io.Serializable;
 
 public abstract class GenericJpaDB3DAO <T extends Persistente, E extends Serializable> extends GenericJpaDAO<T,E> {

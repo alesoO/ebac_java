@@ -1,11 +1,10 @@
-package br.com.primary.main.dao.generics;
+package br.com.primary.main.dao.generics.jpa;
 
 import br.com.primary.main.dao.jpa.Persistente;
-import br.com.primary.main.dao.generics.jpa.GenericJpaDAO;
 import java.io.Serializable;
 
 public abstract class GenericJpaDB1DAO <T extends Persistente, E extends Serializable> extends GenericJpaDAO<T,E> {
-    public GenericJpaDB1DAO(Class<T> persistenceClass) {
-        super(persistenceClass, "MariaDB1");
+    public GenericJpaDB1DAO(Class<T> persistenteClass) {
+        super(persistenteClass, "MariaDB1");
     }
 }
