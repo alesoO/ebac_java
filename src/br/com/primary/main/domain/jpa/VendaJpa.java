@@ -6,11 +6,10 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import br.com.primary.main.domain.Cliente;
-import br.com.primary.main.domain.Produto;
-import br.com.primary.main.domain.ProdutoQuantidade;
-import br.com.primary.main.domain.Venda.Status;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "Sale")
 public class VendaJpa implements Persistente {
 	public enum Status {
 		INICIADA, CONCLUIDA, CANCELADA;
@@ -39,7 +38,7 @@ public class VendaJpa implements Persistente {
     )
     private ClienteJpa cliente;
 
-    @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL/*, fetch = FetchType.EAGER*/)
+    @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL)
     private Set<ProdutoQuantidadeJpa> produtos;
 
     @Column(name = "total_value", nullable = false)

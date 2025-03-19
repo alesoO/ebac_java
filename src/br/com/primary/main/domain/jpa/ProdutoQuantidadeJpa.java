@@ -2,7 +2,7 @@ package br.com.primary.main.domain.jpa;
 
 import java.math.BigDecimal;
 
-import br.com.primary.main.domain.Produto;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "product_quantity")
@@ -55,6 +55,12 @@ public class ProdutoQuantidadeJpa {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public VendaJpa getSale() {
+		return sale;
+	}
+	public void setSale(VendaJpa sale) {
+		this.sale = sale;
 	}
 	
 	public void add(Integer quantity) {

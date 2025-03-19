@@ -1,7 +1,10 @@
 package br.com.primary.main.dao.jpa;
 
-public class ClienteJpaDAO extends  GenericJpaDAO<ClienteJpa, Long> implements IClienteJpa<C> {
+import br.com.primary.main.dao.generics.jpa.GenericJpaDB1DAO;
+import br.com.primary.main.domain.jpa.ClienteJpa;
+
+public class ClienteJpaDAO extends GenericJpaDB1DAO<ClienteJpa, Long> implements IClienteJpaDAO<ClienteJpa> {
 	public ClienteJpaDAO() {
-		super();
+		super(ClienteJpa.class);
 	}
 }

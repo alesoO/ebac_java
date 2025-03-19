@@ -1,7 +1,6 @@
 package br.com.primary.main.domain.jpa;
 
 import javax.persistence.*;
-import br.com.primary.main.domain.jpa.Persistente;
 
 @Entity
 @Table(name = "Client")
@@ -15,16 +14,16 @@ public class ClienteJpa implements Persistente {
 	private String name;
 	
 	@Column(name = "cpf", nullable = false, unique = true)
-	private String cpf;
+	private Long cpf;
 	
 	@Column(name = "Tel", nullable = false)
-	private String tel;
+	private Long tel;
 	
 	@Column(name = "address", nullable = false, length = 100)
 	private String address;
 	
 	@Column(name = "number", nullable = false)
-	private String number;
+	private Integer number;
 	
 	@Column(name = "city", nullable = false, length = 100)
 	private String city;

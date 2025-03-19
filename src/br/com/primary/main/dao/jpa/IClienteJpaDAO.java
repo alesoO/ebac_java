@@ -1,13 +1,7 @@
 package br.com.primary.main.dao.jpa;
 
-import java.io.Serializable;
-import java.util.Collection;
-
-import br.com.primary.main.exceptions.DaoException;
-import br.com.primary.main.exceptions.MoreThanOneRegisterException;
-import br.com.primary.main.exceptions.TableException;
-import br.com.primary.main.exceptions.TypeKeyNotFoundException;
-
-public interface IClienteJpaDAO<C> extends IGenericJapDAO<ClienteJpa, Long> {
+import br.com.primary.main.dao.generics.jpa.IGenericJapDAO;
+import br.com.primary.main.domain.jpa.Persistente;
+public interface IClienteJpaDAO<T extends Persistente> extends IGenericJapDAO<T, Long> {
 	
 }

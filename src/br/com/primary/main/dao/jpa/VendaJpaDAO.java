@@ -1,27 +1,26 @@
 package br.com.primary.main.dao.jpa;
 
-import br.com.primary.main.domain.Venda;
-import br.com.primary.main.domain.jpa.*;
-import br.com.primary.main.dao.generics.jpa.*;
-import br.com.primary.main.exceptions.DaoException;
-import br.com.primary.main.exceptions.TypeKeyNotFoundException;
-
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import br.com.primary.main.dao.generics.jpa.GenericJpaDB1DAO;
+import br.com.primary.main.domain.jpa.*;
+import br.com.primary.main.exceptions.DaoException;
+import br.com.primary.main.exceptions.TypeKeyNotFoundException;
 
-public class VendaJpaDAO extends GenericJpaDAO<VendaJpa, Long> implements IVendaJpaDAO {
+
+public class VendaJpaDAO extends GenericJpaDB1DAO<VendaJpa, Long> implements IVendaJpaDAO {
 	public VendaJpaDAO() {
-		super(VendaJpa.class, "MariaDB1");
+		super(VendaJpa.class);
 	}
 	@Override
-	public void finishVenda(Venda venda) throws TypeKeyNotFoundException, DaoException {
+	public void finishVenda(VendaJpa venda) throws TypeKeyNotFoundException, DaoException {
 		super.edit(venda);
 	}
 	@Override
-	public void cancelVenda(Venda venda) throws TypeKeyNotFoundException, DaoException {
+	public void cancelVenda(VendaJpa venda) throws TypeKeyNotFoundException, DaoException {
 		super.edit(venda);
 	}
 	@Override

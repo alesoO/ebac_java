@@ -1,19 +1,18 @@
-package br.com.primary.main.service.generic;
+package br.com.primary.main.service.generic.jpa;
 
-import java.io.Serializable;
-import java.util.Collection;
-
-import br.com.primary.main.dao.Persistent;
+import br.com.primary.main.domain.jpa.Persistente;
 import br.com.primary.main.exceptions.DaoException;
 import br.com.primary.main.exceptions.MoreThanOneRegisterException;
 import br.com.primary.main.exceptions.TableException;
 import br.com.primary.main.exceptions.TypeKeyNotFoundException;
+import java.io.Serializable;
+import java.util.Collection;
 
-public interface IGenericService<T extends Persistent, E extends Serializable> {
+public interface IGenericJpaService<T extends Persistente, E extends Serializable> {
 	
 	public Boolean add(T entity) throws TypeKeyNotFoundException, DaoException;
 	
-	public void delete(E value) throws DaoException;
+	public void delete(T entity) throws DaoException;
 	
 	public void edit(T entity) throws TypeKeyNotFoundException, DaoException;
 	

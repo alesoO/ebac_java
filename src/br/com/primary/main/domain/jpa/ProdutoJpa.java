@@ -2,9 +2,10 @@ package br.com.primary.main.domain.jpa;
 
 import java.math.BigDecimal;
 
+import javax.persistence.*;
 @Entity
 @Table(name = "Product")
-public class ProdutoJpa {
+public class ProdutoJpa implements Persistente {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="prod_seq")
 	@SequenceGenerator(name="prod_seq", sequenceName="sq_product", initialValue = 1, allocationSize = 1)

@@ -1,6 +1,6 @@
 package br.com.primary.main.dao.generics.jpa;
 
-import br.com.primary.main.dao.jpa.Persistente;
+import br.com.primary.main.domain.jpa.Persistente;
 import br.com.primary.main.exceptions.DaoException;
 import br.com.primary.main.exceptions.MoreThanOneRegisterException;
 import br.com.primary.main.exceptions.TableException;
@@ -14,12 +14,15 @@ import java.util.Collection;
 import java.util.List;
 
 public class GenericJpaDAO <T extends Persistente, E extends Serializable> implements IGenericJapDAO<T,E> {
+	private static final String PERSISTENCE_UNIT_NAME = "MariaDB1";
     protected EntityManagerFactory entityManagerFactory;
     protected EntityManager entityManager;
     private Class<T> persistenceClass;
+	private String persistenceUnitName;
 
-    public GenericJpaDAO(Class<T> persistenceClass, String MariaDB1) {
+    public GenericJpaDAO(Class<T> persistenceClass, String persistenceUnitName) {
         this.persistenceClass = persistenceClass;
+		this.persistenceUnitName = persistenceUnitName;
     }
 
     @Override
@@ -83,5 +86,13 @@ public class GenericJpaDAO <T extends Persistente, E extends Serializable> imple
 		sb.append(this.persistenceClass.getSimpleName());
 		sb.append(" obj");
 		return sb.toString();
+	}
+
+	private String getPersistenceUnitName() {
+		if (persistenceUnitName != null && !"".equals(persistenceUnitName)) {
+			return persistenceUnitName;
+		} else {
+			return PERSISTENCE_UNIT_NAME;
+		}
 	}
 }
