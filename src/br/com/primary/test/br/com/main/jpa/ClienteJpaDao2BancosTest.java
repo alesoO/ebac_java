@@ -42,7 +42,7 @@ public class ClienteJpaDao2BancosTest {
         list.forEach(cli -> {
             try {
                 clienteDao.delete(cli);
-            } catch (Exception e) {
+            } catch (DaoException e) {
                 e.printStackTrace();
             }
         });
@@ -51,7 +51,7 @@ public class ClienteJpaDao2BancosTest {
         list.forEach(cli -> {
             try {
                 clienteDB2Dao.delete(cli);
-            } catch (Exception e) {
+            } catch (DaoException e) {
                 e.printStackTrace();
             }
         });
@@ -92,7 +92,7 @@ public class ClienteJpaDao2BancosTest {
         ClienteJpa retorno = clienteDao.add(cliente);
         Assert.assertNotNull(retorno);
 
-        ClienteJpa clienteConsultado = clienteDao.show(retorno.getId());
+        ClienteJpa clienteConsultado = clienteDao.show(cliente.getId());
         Assert.assertNotNull(clienteConsultado);
 
         clienteDao.delete(cliente);
@@ -136,13 +136,13 @@ public class ClienteJpaDao2BancosTest {
         list.forEach(cli -> {
             try {
                 clienteDao.delete(cli);
-            } catch (Exception e) {
+            } catch (DaoException e) {
                 e.fillInStackTrace();
             }
         });
         Collection<ClienteJpa> list1 = clienteDao.showAll();
-        assertTrue(list != null);
-        assertTrue(list.size() == 0);
+        assertTrue(list1 != null);
+        assertTrue(list1.size() == 0);
     }
 
     private ClienteJpa criarCliente() {
