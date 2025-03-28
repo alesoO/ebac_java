@@ -2,26 +2,32 @@ package br.com.primary.main.domain;
 
 import java.math.BigDecimal;
 
-import br.com.primary.annotation.Table;
-import br.com.primary.annotation.TableColumn;
-import br.com.primary.annotation.TypeKey;
-import br.com.primary.main.dao.Persistent;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
-@Table("Product")
+@Entity
+@Table(name = "Produto")
+@NamedQuery(name = "Produto.findByNome", query = "SELECT c FROM Produto c WHERE c.nome LIKE :nome")
 public class Produto implements Persistent {
-	@TableColumn(dbName = "id", setJavaName = "setId")
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "prod_seq")
+	@SequenceGenerator(name = "prod_seq", sequenceName = "sq_produto", initialValue = 1, allocationSize = 1)
 	private Long id;
-	@TypeKey("getCode")
-	@TableColumn(dbName = "code", setJavaName = "setCode")
+
+	@Column(name = "code", nullable = false, length = 10, unique = true)
 	private String code;
-	@TableColumn(dbName = "name", setJavaName = "setName")
+	@Column(name = "name", nullable = false, length = 50)
 	private String name;
-	@TableColumn(dbName = "description", setJavaName = "setDescription")
+	@Column(name = "description", nullable = false, length = 50)
 	private String description;
-	@TableColumn(dbName = "value", setJavaName = "setValue")
+	@Column(name = "value", nullable = false)
 	private BigDecimal value;
-	@TableColumn(dbName = "category", setJavaName = "setCategory")
-	private String category;
 	
 	public String getCode() {
 		return code;
@@ -53,10 +59,5 @@ public class Produto implements Persistent {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getCategory() {
-		return category;
-	}
-	public void setCategory(String category) {
-		this.category = category;
-	}
+
 }

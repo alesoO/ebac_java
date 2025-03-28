@@ -1,5 +1,10 @@
 package br.com.primary.main.service;
 
+import java.util.List;
+
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+
 import br.com.primary.main.dao.IClienteDao;
 import br.com.primary.main.domain.Cliente;
 import br.com.primary.main.exceptions.DaoException;
@@ -8,8 +13,12 @@ import br.com.primary.main.exceptions.TableException;
 import br.com.primary.main.service.generic.GenericService;
 
 public class ClienteService extends GenericService<Cliente, Long> implements IClienteService {
-	public ClienteService(IClienteDao clienteDAO) {
-		super(clienteDAO);
+	private IClienteDao clienteDao;
+
+	@Inject
+	public ClienteService(IClienteDao clienteDao) {
+		super(clienteDao);
+		this.clienteDao = clienteDao;
 	}
 	
 	@Override
@@ -20,5 +29,10 @@ public class ClienteService extends GenericService<Cliente, Long> implements ICl
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Override
+	public List<Cliente> filtrarClientes(String query) {
+		return clienteDao.filtrarClientes(query);
 	}
 }

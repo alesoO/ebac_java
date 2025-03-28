@@ -22,23 +22,18 @@ public abstract class GenericService<T extends Persistent, E extends Serializabl
 	}
 	
 	@Override
-	public void delete(E value) throws DaoException {
-		this.dao.delete(value);
+	public void delete(T entity) throws DaoException {
+		this.dao.delete(entity);
 	}
 	
 	@Override
 	public void edit(T entity) throws TypeKeyNotFoundException, DaoException {
-		this.edit(entity);
+		this.dao.edit(entity);
 	}
 	
 	@Override
-	public T show(E value) throws DaoException {
-		try {
-			return this.dao.show(value);
-		} catch(MoreThanOneRegisterException | TableException e) {
-			e.printStackTrace();
-		}
-		return null;
+	public T show(E value) throws MoreThanOneRegisterException, TableException, DaoException {
+		return this.dao.show(value);
 	}
 	
 	@Override

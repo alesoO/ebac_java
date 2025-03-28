@@ -13,11 +13,11 @@ public interface IGenericDAO <T extends Persistent, E extends Serializable> {
 	
 	public Boolean add(T entity) throws TypeKeyNotFoundException, DaoException;
 	
-	public void delete(E value) throws DaoException;
+	public void delete(T entity) throws DaoException;
 	
 	public void edit(T entity) throws TypeKeyNotFoundException, DaoException;
 	
-	public T show(E value) throws MoreThanOneRegisterException, TableException, DaoException;
+	public T show(E id) throws MoreThanOneRegisterException, TableException, DaoException;
 	
 	public Collection<T> showAll() throws DaoException;
 }

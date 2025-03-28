@@ -6,12 +6,22 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import br.com.primary.annotation.Table;
-import br.com.primary.annotation.TableColumn;
-import br.com.primary.annotation.TypeKey;
-import br.com.primary.main.dao.Persistent;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
-@Table("Sale")
+@Table("Venda")
 public class Venda implements Persistent {
 	public enum Status {
 		INICIADA, CONCLUIDA, CANCELADA;
@@ -25,19 +35,24 @@ public class Venda implements Persistent {
 		}
 	}
 	
-	@TableColumn(dbName = "id", setJavaName = "setId")
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "prod_seq")
+	@SequenceGenerator(name = "prod_seq", sequenceName = "sq_produto", initialValue = 1, allocationSize = 1)
 	private Long id;
-	@TypeKey("getCode")
-	@TableColumn(dbName = "code", setJavaName = "setCode")
+
+	@Column(name = "code", nullable = false, unique = true)
 	private String code;
-	@TableColumn(dbName = "id_client_fk", setJavaName = "setIdClientFk")
+	@ManyToOne
+	@JoinColumn(name = "id_cliente_fk", foreignKey = @ForeignKey(name = "fk_venda_cliente"), referencedColumnName = "id", nullable = false)
 	private Cliente cliente;
+	@OneToMany(mappedBy = "venda", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<ProdutoQuantidade> produtos;
-	@TableColumn(dbName = "total_value", setJavaName = "setTotalValue")
+	@Column(name = "total_value", nullable = false)
 	private BigDecimal totalValue;
-	@TableColumn(dbName = "sale_date", setJavaName = "setSaleDate")
+	@Column(name = "sale_date", nullable = false)
 	private Instant saleDate;
-	@TableColumn(dbName = "sale_status", setJavaName = "setStatus")
+	@Enumerated(EnumType.STRING)
+	@Column(name = "sale_status", nullable = false)
 	private Status status;
 	
 	public Venda() {
@@ -112,7 +127,6 @@ public class Venda implements Persistent {
 	}
 	
 	public void recalculateTotalSellValue() {
-		validateStatus();
 		BigDecimal totalValue = BigDecimal.ZERO;
 		for (ProdutoQuantidade prod : this.produtos) {
 			totalValue = totalValue.add(prod.getTotalValue());
