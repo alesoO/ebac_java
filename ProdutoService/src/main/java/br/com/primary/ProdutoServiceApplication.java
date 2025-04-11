@@ -9,8 +9,8 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @SpringBootApplication
 @RefreshScope
 @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
-public class ClienteServiceApplication {
+public class ProdutoServiceApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(ClienteServiceApplication.class, args);
+		SpringApplication.run(ProdutoServiceApplication.class, args);
 	}
 }

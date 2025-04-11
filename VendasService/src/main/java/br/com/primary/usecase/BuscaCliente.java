@@ -8,8 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.idias.vendas.online.domain.Cliente;
-import com.idias.vendas.online.repository.IClienteRepository;
+import br.com.primary.domain.Cliente;
+import br.com.primary.repository.IClienteRepository;
 
 @Service
 public class BuscaCliente {

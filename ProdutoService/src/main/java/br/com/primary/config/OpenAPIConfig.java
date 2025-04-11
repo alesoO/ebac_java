@@ -14,9 +14,9 @@ public class OpenAPIConfig {
     @Bean
     public OpenAPIConfig(@Value("${application-version}") String appVersion) {
         return new OpenAPI().info(new Info()
-            .title("Serviço de Clientes")
+            .title("Serviço de Produtos")
             .version(appVersion)
-            .description("Serviço para gerenciamento de clientes")
+            .description("Serviço para gerenciamento de produtos")
             .termsOfService("http://swagger.io/terms/")
             .license(new License().name("Apache 2.0").url("http://springdoc.org"))
             .contact(new Contact().name('Admin da Silva').email("admin@Gmail.com")));
