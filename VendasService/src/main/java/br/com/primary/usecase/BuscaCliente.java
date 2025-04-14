@@ -9,30 +9,30 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.primary.domain.Cliente;
-import br.com.primary.repository.IClienteRepository;
+import br.com.primary.repository.IVendaRepository;
 
 @Service
 public class BuscaCliente {
-    private IClienteRepository clienteRepository;
+    private IVendaRepository vendaRepository;
 
-    public BuscaCliente(IClienteRepository clienteRepository) {
-        this.clienteRepository = clienteRepository;
+    public BuscaCliente(IVendaRepository produtoRepository) {
+        this.vendaRepository = produtoRepository;
     }
 
     public Page<Cliente> buscar(Pageable pageable) {
-        return clienteRepository.findAll(pageable);
+        return vendaRepository.findAll(pageable);
     }
 
     public Cliente buscarPorId(String id) {
-        return clienteRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Recurso não encontrado para o id informado"));
+        return vendaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Recurso não encontrado para o id informado"));
     }
 
     public Boolean isCadastrado(String id) {
-        Optional<Cliente> cliente = clienteRepository.findById(id);
+        Optional<Cliente> cliente = vendaRepository.findById(id);
         return cliente.isPresent() ? true : false;
     }
 
     public Cliente buscarPorCpf(String cpf) {
-        return  clienteRepository.findByCpf(cpf).orElseThrow(() -> new EntityNotFoundException("Recurso não encontrado para CPF informado"));
+        return  vendaRepository.findByCpf(cpf).orElseThrow(() -> new EntityNotFoundException("Recurso não encontrado para CPF informado"));
     }
 }
